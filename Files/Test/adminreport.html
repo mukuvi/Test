@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en" x-data="adminReports()" class="bg-gray-100">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Reports - EcoSense AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      defer
+    ></script>
+    <style>
+      [x-cloak] {
+        display: none !important;
+      }
+      .progress-bar {
+        height: 8px;
+        border-radius: 4px;
+        background-color: #e5e7eb;
+      }
+      .progress-fill {
+        height: 100%;
+        border-radius: 4px;
+        background-color: #10b981;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex">
+    <!-- Sidebar Navigation (same as your existing admin page) -->
+    <aside class="w-64 bg-gray-800 text-white p-4 hidden md:block">
+      <div class="flex items-center space-x-2 mb-8">
+        <div
+          class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+        <span class="font-bold">Admin Dashboard</span>
+      </div>
+      <nav class="space-y-2">
+        <a href="#" class="block py-2 px-4 rounded bg-gray-700"
+          >Reports Overview</a
+        >
+        <a
+          href="testAdmin.html"
+          class="block py-2 px-4 rounded hover:bg-gray-700"
+          >User Management</a
+        >
+        <a
+          href="adminreward.html"
+          class="block py-2 px-4 rounded hover:bg-gray-700"
+          >Reward System</a
+        >
+        <a href="#" class="block py-2 px-4 rounded hover:bg-gray-700"
+          >Settings</a
+        >
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+      <!-- Top Navigation -->
+      <header
+        class="bg-white border-b border-gray-200 p-4 flex justify-between items-center"
+      >
+        <h1 class="text-xl font-bold text-gray-800">Reports Dashboard</h1>
+        <div class="flex items-center space-x-4">
+          <button class="p-2 rounded-full hover:bg-gray-100">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+          <div class="flex items-center space-x-2">
+            <span class="text-sm font-medium">Admin User</span>
+            <div
+              class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-green-600"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Content -->
+      <main class="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-50">
+        <!-- Filters -->
+        <div class="bg-white rounded-lg shadow p-4 mb-6">
+          <div
+            class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0"
+          >
+            <div>
+              <h2 class="text-lg font-semibold">Report Filters</h2>
+            </div>
+            <div
+              class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4"
+            >
+              <select
+                class="border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                <option>All Counties</option>
+                <option>Nairobi</option>
+                <option>Mombasa</option>
+                <option>Kisumu</option>
+                <option>Nakuru</option>
+              </select>
+              <select
+                class="border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                <option>All Waste Types</option>
+                <option>Plastic</option>
+                <option>Organic</option>
+                <option>E-Waste</option>
+                <option>Hazardous</option>
+              </select>
+              <select
+                class="border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                <option>Last 30 Days</option>
+                <option>Last Week</option>
+                <option>Last 3 Months</option>
+                <option>Custom Range</option>
+              </select>
+              <button
+                class="bg-green-600 text-white px-4 py-2 rounded text-sm hover:bg-green-700"
+              >
+                Apply Filters
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+          <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-gray-500">Total Reports</p>
+                <p class="text-2xl font-bold mt-1">1,248</p>
+              </div>
+              <div class="bg-green-100 p-3 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-green-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="flex justify-between text-sm text-gray-500">
+                <span>This Month</span>
+                <span>+12.5%</span>
+              </div>
+              <div class="progress-bar mt-1">
+                <div class="progress-fill" style="width: 65%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-gray-500">Resolved</p>
+                <p class="text-2xl font-bold mt-1">872</p>
+              </div>
+              <div class="bg-blue-100 p-3 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-blue-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="flex justify-between text-sm text-gray-500">
+                <span>Resolution Rate</span>
+                <span>70%</span>
+              </div>
+              <div class="progress-bar mt-1">
+                <div class="progress-fill" style="width: 70%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-gray-500">Active Users</p>
+                <p class="text-2xl font-bold mt-1">543</p>
+              </div>
+              <div class="bg-purple-100 p-3 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-purple-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="flex justify-between text-sm text-gray-500">
+                <span>New This Month</span>
+                <span>+48</span>
+              </div>
+              <div class="progress-bar mt-1">
+                <div class="progress-fill" style="width: 40%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-gray-500">
+                  Rewards Redeemed
+                </p>
+                <p class="text-2xl font-bold mt-1">216</p>
+              </div>
+              <div class="bg-yellow-100 p-3 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-yellow-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v13m-8-6v6m16-10v10M9 15l6-6m0 0l6 6"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="flex justify-between text-sm text-gray-500">
+                <span>This Month</span>
+                <span>+32%</span>
+              </div>
+              <div class="progress-bar mt-1">
+                <div class="progress-fill" style="width: 55%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <!-- Reports by Type -->
+          <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="font-semibold">Reports by Waste Type</h3>
+              <select
+                class="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                <option>Last 30 Days</option>
+                <option>Last Week</option>
+                <option>Last 3 Months</option>
+              </select>
+            </div>
+            <div class="h-64">
+              <canvas id="wasteTypeChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Reports by County -->
+          <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="font-semibold">Reports by County</h3>
+              <select
+                class="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                <option>Last 30 Days</option>
+                <option>Last Week</option>
+                <option>Last 3 Months</option>
+              </select>
+            </div>
+            <div class="h-64">
+              <canvas id="countyChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Reports Table -->
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+          <div
+            class="p-4 border-b border-gray-200 flex justify-between items-center"
+          >
+            <h3 class="font-semibold">Recent Waste Reports</h3>
+            <button
+              class="text-sm text-green-600 hover:text-green-800 font-medium"
+            >
+              View All Reports
+            </button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Report ID
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Location
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Type
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Reported By
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Date
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Status
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <tr class="hover:bg-gray-50">
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                  >
+                    #RPT-1256
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    Nairobi, Westlands
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    Plastic
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    user@example.com
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    May 18, 2025
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span
+                      class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                      >Resolved</span
+                    >
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                  >
+                    <button class="text-green-600 hover:text-green-900 mr-3">
+                      View
+                    </button>
+                    <button class="text-gray-600 hover:text-gray-900">
+                      More
+                    </button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                  >
+                    #RPT-1255
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    Mombasa, Nyali
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    Organic
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    user2@example.com
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    May 17, 2025
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span
+                      class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800"
+                      >In Progress</span
+                    >
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                  >
+                    <button class="text-green-600 hover:text-green-900 mr-3">
+                      View
+                    </button>
+                    <button class="text-gray-600 hover:text-gray-900">
+                      More
+                    </button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                  >
+                    #RPT-1254
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    Kisumu, Milimani
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    E-Waste
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    user3@example.com
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    May 16, 2025
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span
+                      class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800"
+                      >Pending</span
+                    >
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                  >
+                    <button class="text-green-600 hover:text-green-900 mr-3">
+                      View
+                    </button>
+                    <button class="text-gray-600 hover:text-gray-900">
+                      More
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // Alpine.js data and functions
+      function adminReports() {
+        return {
+          init() {
+            // Initialize charts when component is mounted
+            this.initCharts();
+          },
+          initCharts() {
+            // Waste Type Chart (Doughnut)
+            const wasteTypeCtx = document
+              .getElementById("wasteTypeChart")
+              .getContext("2d");
+            new Chart(wasteTypeCtx, {
+              type: "doughnut",
+              data: {
+                labels: ["Plastic", "Organic", "E-Waste", "Hazardous", "Other"],
+                datasets: [
+                  {
+                    data: [45, 25, 15, 10, 5],
+                    backgroundColor: [
+                      "#10B981",
+                      "#3B82F6",
+                      "#8B5CF6",
+                      "#EF4444",
+                      "#F59E0B",
+                    ],
+                    borderWidth: 0,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    position: "right",
+                  },
+                },
+              },
+            });
+
+            // County Chart (Bar)
+            const countyCtx = document
+              .getElementById("countyChart")
+              .getContext("2d");
+            new Chart(countyCtx, {
+              type: "bar",
+              data: {
+                labels: [
+                  "Nairobi",
+                  "Mombasa",
+                  "Kisumu",
+                  "Nakuru",
+                  "Kiambu",
+                  "Others",
+                ],
+                datasets: [
+                  {
+                    label: "Reports",
+                    data: [320, 180, 95, 70, 60, 25],
+                    backgroundColor: "#10B981",
+                    borderRadius: 4,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    grid: {
+                      drawBorder: false,
+                    },
+                  },
+                  x: {
+                    grid: {
+                      display: false,
+                    },
+                  },
+                },
+                plugins: {
+                  legend: {
+                    display: false,
+                  },
+                },
+              },
+            });
+          },
+        };
+      }
+    </script>
+  </body>
+</html>

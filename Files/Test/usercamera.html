@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Report Waste - EcoSense AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      #cameraPreview {
+        display: none;
+        object-fit: cover;
+      }
+      #capturedImage {
+        max-height: 300px;
+        object-fit: contain;
+      }
+    </style>
+  </head>
+  <body class="bg-green-50">
+    <header class="bg-white shadow-md">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex items-center">
+        <h1 class="text-2xl font-bold text-green-600">EcoSense AI</h1>
+        <nav class="ml-auto hidden md:flex space-x-6">
+          <a href="testUser.html" class="text-gray-600 hover:text-green-600"
+            >Dashboard</a
+          >
+
+          <a href="rewards.html" class="text-gray-600 hover:text-green-600"
+            >Rewards</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="bg-green-600 px-6 py-4">
+          <h2 class="text-2xl font-bold text-white">Report Waste Incident</h2>
+          <p class="text-green-100">
+            Help keep Kenya clean by reporting waste in your area
+          </p>
+        </div>
+
+        <form class="p-6 space-y-6">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-3">
+              1. Location Details
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="county"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >County</label
+                >
+                <select
+                  id="county"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                >
+                  <option value="">Select County</option>
+                  <option value="nairobi">Nairobi</option>
+                  <option value="mombasa">Mombasa</option>
+                  <option value="kisumu">Kisumu</option>
+                  <option value="nakuru">Nakuru</option>
+                  <option value="kiambu">Kiambu</option>
+                </select>
+              </div>
+              <div>
+                <label
+                  for="ward"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >Ward/Area</label
+                >
+                <input
+                  type="text"
+                  id="ward"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                  placeholder="e.g. Westlands"
+                />
+              </div>
+            </div>
+            <div class="mt-4">
+              <label
+                for="landmark"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Nearest Landmark</label
+              >
+              <input
+                type="text"
+                id="landmark"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                placeholder="e.g. Near ABC Mall"
+              />
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-3">
+              2. Waste Details
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="waste-type"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >Waste Type</label
+                >
+                <select
+                  id="waste-type"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                >
+                  <option value="">Select Waste Type</option>
+                  <option value="plastic">Plastic Waste</option>
+                  <option value="organic">Organic Waste</option>
+                  <option value="electronic">E-Waste</option>
+                  <option value="hazardous">Hazardous Waste</option>
+                  <option value="construction">Construction Debris</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label
+                  for="waste-amount"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >Estimated Amount</label
+                >
+                <select
+                  id="waste-amount"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                >
+                  <option value="">Select Amount</option>
+                  <option value="small">Small (1-5 bags)</option>
+                  <option value="medium">Medium (5-20 bags)</option>
+                  <option value="large">Large (20+ bags)</option>
+                  <option value="dump-site">Dump Site</option>
+                </select>
+              </div>
+            </div>
+            <div class="mt-4">
+              <label
+                for="description"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Additional Description</label
+              >
+              <textarea
+                id="description"
+                rows="3"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                placeholder="Provide more details about the waste..."
+              ></textarea>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-3">
+              3. Photo Evidence
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">
+              Please provide clear photos of the waste for verification.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div
+                class="border-2 border-dashed border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center"
+              >
+                <video
+                  id="cameraPreview"
+                  autoplay
+                  playsinline
+                  class="w-full h-48 rounded"
+                ></video>
+                <img id="capturedImage" class="w-full rounded hidden" />
+                <div id="cameraPlaceholder" class="text-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-12 w-12 text-gray-400 mx-auto"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                  <p class="mt-2 text-sm text-gray-600">No photo captured</p>
+                </div>
+
+                <div class="mt-4 flex space-x-3">
+                  <button
+                    type="button"
+                    id="startCamera"
+                    class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  >
+                    Open Camera
+                  </button>
+                  <button
+                    type="button"
+                    id="capturePhoto"
+                    class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 hidden"
+                  >
+                    Capture
+                  </button>
+                  <button
+                    type="button"
+                    id="retakePhoto"
+                    class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 hidden"
+                  >
+                    Retake
+                  </button>
+                </div>
+              </div>
+
+              <div
+                class="border-2 border-dashed border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-12 w-12 text-gray-400 mx-auto"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                  />
+                </svg>
+                <p class="mt-2 text-sm text-gray-600">Or upload from device</p>
+                <input
+                  type="file"
+                  id="photoUpload"
+                  accept="image/*"
+                  class="hidden"
+                />
+                <label
+                  for="photoUpload"
+                  class="mt-4 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 cursor-pointer"
+                >
+                  Choose File
+                </label>
+                <p id="fileName" class="mt-2 text-sm text-gray-600 hidden"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-gray-200">
+            <div class="flex justify-between items-center">
+              <button
+                type="button"
+                class="px-6 py-3 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                Submit Report
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <script>
+      const cameraPreview = document.getElementById("cameraPreview");
+      const capturedImage = document.getElementById("capturedImage");
+      const cameraPlaceholder = document.getElementById("cameraPlaceholder");
+      const startCameraBtn = document.getElementById("startCamera");
+      const capturePhotoBtn = document.getElementById("capturePhoto");
+      const retakePhotoBtn = document.getElementById("retakePhoto");
+      const photoUpload = document.getElementById("photoUpload");
+      const fileName = document.getElementById("fileName");
+
+      let stream = null;
+
+      // Start camera
+      startCameraBtn.addEventListener("click", async () => {
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({ video: true });
+          cameraPreview.srcObject = stream;
+          cameraPreview.style.display = "block";
+          cameraPlaceholder.style.display = "none";
+          startCameraBtn.classList.add("hidden");
+          capturePhotoBtn.classList.remove("hidden");
+        } catch (err) {
+          console.error("Error accessing camera:", err);
+          alert("Could not access the camera. Please check permissions.");
+        }
+      });
+
+      // Capture photo
+      capturePhotoBtn.addEventListener("click", () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = cameraPreview.videoWidth;
+        canvas.height = cameraPreview.videoHeight;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(cameraPreview, 0, 0, canvas.width, canvas.height);
+
+        capturedImage.src = canvas.toDataURL("image/png");
+        capturedImage.classList.remove("hidden");
+        cameraPreview.style.display = "none";
+        capturePhotoBtn.classList.add("hidden");
+        retakePhotoBtn.classList.remove("hidden");
+
+        // Stop camera stream
+        if (stream) {
+          stream.getTracks().forEach((track) => track.stop());
+        }
+      });
+
+      // Retake photo
+      retakePhotoBtn.addEventListener("click", () => {
+        capturedImage.classList.add("hidden");
+        cameraPlaceholder.style.display = "block";
+        retakePhotoBtn.classList.add("hidden");
+        startCameraBtn.classList.remove("hidden");
+      });
+
+      // File upload
+      photoUpload.addEventListener("change", (e) => {
+        if (e.target.files.length > 0) {
+          const file = e.target.files[0];
+          fileName.textContent = file.name;
+          fileName.classList.remove("hidden");
+
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            capturedImage.src = event.target.result;
+            capturedImage.classList.remove("hidden");
+            cameraPlaceholder.style.display = "none";
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    </script>
+  </body>
+</html>

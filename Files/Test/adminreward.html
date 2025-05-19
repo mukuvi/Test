@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en" x-data="{ openMenu: false }">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reward System - EcoSense Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      defer
+    ></script>
+    <style>
+      [x-cloak] {
+        display: none !important;
+      }
+      .progress-bar {
+        height: 6px;
+        background-color: #e5e7eb;
+        border-radius: 3px;
+      }
+      .progress-fill {
+        height: 100%;
+        border-radius: 3px;
+        background-color: #10b981;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <div
+      x-show="openMenu"
+      x-cloak
+      @click="openMenu = false"
+      class="fixed inset-0 z-50 bg-gray-800 bg-opacity-75 lg:hidden"
+    ></div>
+
+    <aside
+      :class="openMenu ? 'translate-x-0' : '-translate-x-full'"
+      class="fixed top-0 left-0 z-40 w-64 h-full bg-green-700 text-white transition-transform transform lg:translate-x-0"
+    >
+      <div class="flex items-center justify-between p-4">
+        <span class="text-xl lg:text-2xl font-bold">EcoSense Admin</span>
+        <button @click="openMenu = false" class="text-white lg:hidden">
+          ✕
+        </button>
+      </div>
+      <nav class="mt-4 lg:mt-6">
+        <a
+          href="testAdmin.html"
+          @click="openMenu = false"
+          class="block py-2 px-4 hover:bg-green-600 text-sm lg:text-base"
+          >Dashboard</a
+        >
+        <a
+          href="adminreport.html"
+          @click="openMenu = false"
+          class="block py-2 px-4 hover:bg-green-600 text-sm lg:text-base"
+          >Reports</a
+        >
+        <a
+          href="adminanalytics.html"
+          @click="openMenu = false"
+          class="block py-2 px-4 hover:bg-green-600 text-sm lg:text-base"
+          >Users</a
+        >
+        <a
+          href="adminanalytics.html"
+          @click="openMenu = false"
+          class="block py-2 px-4 hover:bg-green-600 text-sm lg:text-base"
+          >Analytics</a
+        >
+        <a
+          href="#"
+          @click="openMenu = false"
+          class="block py-2 px-4 bg-green-600 text-sm lg:text-base"
+          >Reward System</a
+        >
+        <a
+          href="#"
+          @click="openMenu = false"
+          class="block py-2 px-4 hover:bg-green-600 text-sm lg:text-base"
+          >Settings</a
+        >
+        <a
+          href="pages.html"
+          @click="openMenu = false"
+          class="block py-2 px-4 hover:bg-green-600 text-sm lg:text-base"
+          >Logout</a
+        >
+      </nav>
+    </aside>
+
+    <div class="flex-1 flex flex-col ml-0 lg:ml-64">
+      <header
+        class="flex justify-between items-center p-3 bg-white shadow-md lg:hidden"
+      >
+        <button @click="openMenu = !openMenu" class="text-green-700">
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+        </button>
+        <span class="text-xl font-bold text-green-700">Reward System</span>
+        <div class="w-6"></div>
+      </header>
+
+      <main class="p-3 lg:p-6">
+        <h1 class="text-2xl lg:text-3xl font-bold text-green-700 mb-4 lg:mb-6">
+          Reward System Management
+        </h1>
+
+        <section
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-6 lg:mb-10"
+        >
+          <div
+            class="bg-white p-4 lg:p-5 rounded-lg shadow hover:shadow-md transition-shadow"
+          >
+            <h3 class="text-base lg:text-lg font-semibold text-gray-600">
+              Total Rewards
+            </h3>
+            <p
+              class="text-2xl lg:text-3xl font-bold text-green-700 mt-1 lg:mt-2"
+            >
+              24
+            </p>
+          </div>
+          <div
+            class="bg-white p-4 lg:p-5 rounded-lg shadow hover:shadow-md transition-shadow"
+          >
+            <h3 class="text-base lg:text-lg font-semibold text-gray-600">
+              Redeemed
+            </h3>
+            <p
+              class="text-2xl lg:text-3xl font-bold text-green-700 mt-1 lg:mt-2"
+            >
+              216
+            </p>
+          </div>
+          <div
+            class="bg-white p-4 lg:p-5 rounded-lg shadow hover:shadow-md transition-shadow"
+          >
+            <h3 class="text-base lg:text-lg font-semibold text-gray-600">
+              Active Users
+            </h3>
+            <p
+              class="text-2xl lg:text-3xl font-bold text-green-700 mt-1 lg:mt-2"
+            >
+              543
+            </p>
+          </div>
+          <div
+            class="bg-white p-4 lg:p-5 rounded-lg shadow hover:shadow-md transition-shadow"
+          >
+            <h3 class="text-base lg:text-lg font-semibold text-gray-600">
+              Points Distributed
+            </h3>
+            <p
+              class="text-2xl lg:text-3xl font-bold text-green-700 mt-1 lg:mt-2"
+            >
+              12,450
+            </p>
+          </div>
+        </section>
+
+        <section class="bg-white p-4 lg:p-6 rounded-lg shadow mb-6 lg:mb-8">
+          <div
+            class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4"
+          >
+            <h2 class="text-lg lg:text-xl font-bold text-gray-800">
+              Manage Rewards
+            </h2>
+            <button
+              class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 flex items-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mr-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              Add New Reward
+            </button>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Reward
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Points
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Stock
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Redeemed
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Status
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div
+                        class="flex-shrink-0 h-10 w-10 bg-green-100 rounded-full flex items-center justify-center"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-6 w-6 text-green-600"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 8v13m-8-6v6m16-10v10M9 15l6-6m0 0l6 6"
+                          />
+                        </svg>
+                      </div>
+                      <div class="ml-4">
+                        <div class="text-sm font-medium text-gray-900">
+                          Shopping Voucher
+                        </div>
+                        <div class="text-sm text-gray-500">
+                          10% off at partner stores
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    500 pts
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    Unlimited
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    87
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span
+                      class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                      >Active</span
+                    >
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                  >
+                    <button class="text-green-600 hover:text-green-900 mr-3">
+                      Edit
+                    </button>
+                    <button class="text-gray-600 hover:text-gray-900">
+                      Disable
+                    </button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div
+                        class="flex-shrink-0 h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-6 w-6 text-blue-600"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                          />
+                        </svg>
+                      </div>
+                      <div class="ml-4">
+                        <div class="text-sm font-medium text-gray-900">
+                          Mobile Airtime
+                        </div>
+                        <div class="text-sm text-gray-500">KES 100 airtime</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    300 pts
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    45
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    112
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span
+                      class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                      >Active</span
+                    >
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                  >
+                    <button class="text-green-600 hover:text-green-900 mr-3">
+                      Edit
+                    </button>
+                    <button class="text-gray-600 hover:text-gray-900">
+                      Disable
+                    </button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div
+                        class="flex-shrink-0 h-10 w-10 bg-purple-100 rounded-full flex items-center justify-center"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-6 w-6 text-purple-600"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                          />
+                        </svg>
+                      </div>
+                      <div class="ml-4">
+                        <div class="text-sm font-medium text-gray-900">
+                          Eco Tote Bag
+                        </div>
+                        <div class="text-sm text-gray-500">
+                          Reusable shopping bag
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    750 pts
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    12
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    8
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span
+                      class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800"
+                      >Low Stock</span
+                    >
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                  >
+                    <button class="text-green-600 hover:text-green-900 mr-3">
+                      Edit
+                    </button>
+                    <button class="text-gray-600 hover:text-gray-900">
+                      Disable
+                    </button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div
+                        class="flex-shrink-0 h-10 w-10 bg-red-100 rounded-full flex items-center justify-center"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-6 w-6 text-red-600"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                          />
+                        </svg>
+                      </div>
+                      <div class="ml-4">
+                        <div class="text-sm font-medium text-gray-900">
+                          Tree Planting Kit
+                        </div>
+                        <div class="text-sm text-gray-500">
+                          Seedlings + tools
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    1,000 pts
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    0
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    9
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span
+                      class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800"
+                      >Out of Stock</span
+                    >
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                  >
+                    <button class="text-green-600 hover:text-green-900 mr-3">
+                      Edit
+                    </button>
+                    <button class="text-gray-600 hover:text-gray-900">
+                      Restock
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="bg-white p-4 lg:p-6 rounded-lg shadow">
+          <div
+            class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4"
+          >
+            <h2 class="text-lg lg:text-xl font-bold text-gray-800">
+              Redemption History
+            </h2>
+            <div class="flex space-x-2">
+              <select
+                class="border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+              >
+                <option>All Rewards</option>
+                <option>Shopping Voucher</option>
+                <option>Mobile Airtime</option>
+                <option>Eco Tote Bag</option>
+                <option>Tree Planting Kit</option>
+              </select>
+              <select
+                class="border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+              >
+                <option>Last 30 Days</option>
+                <option>Last Week</option>
+                <option>Last 3 Months</option>
+                <option>All Time</option>
+              </select>
+              <button
+                class="bg-green-600 text-white px-4 py-2 rounded text-sm hover:bg-green-700"
+              >
+                Filter
+              </button>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    User
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Reward
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Points
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Date
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Status
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div
+                        class="flex-shrink-0 h-10 w-10 rounded-full bg-green-100 flex items-center justify-center"
+                      >
+                        <span class="text-green-600 font-medium">JW</span>
+                      </div>
+                      <div class="ml-4">
+                        <div class="text-sm font-medium text-gray-900">
+                          Jane Wambui
+                        </div>
+                        <div class="text-sm text-gray-500">
+                          jane.w@example.com
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    Mobile Airtime
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    -300 pts
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    May 18, 2025
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span
+                      class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                      >Completed</span
+                    >
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                  >
+                    <button class="text-green-600 hover:text-green-900">
+                      View
+                    </button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div
+                        class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center"
+                      >
+                        <span class="text-blue-600 font-medium">BO</span>
+                      </div>
+                      <div class="ml-4">
+                        <div class="text-sm font-medium text-gray-900">
+                          Brian Otieno
+                        </div>
+                        <div class="text-sm text-gray-500">
+                          brian.o@example.com
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    Shopping Voucher
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    -500 pts
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    May 17, 2025
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span
+                      class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                      >Completed</span
+                    >
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                  >
+                    <button class="text-green-600 hover:text-green-900">
+                      View
+                    </button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div
+                        class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center"
+                      >
+                        <span class="text-purple-600 font-medium">FN</span>
+                      </div>
+                      <div class="ml-4">
+                        <div class="text-sm font-medium text-gray-900">
+                          Faith Njeri
+                        </div>
+                        <div class="text-sm text-gray-500">
+                          faith.n@example.com
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    Eco Tote Bag
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    -750 pts
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    May 16, 2025
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span
+                      class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800"
+                      >Pending</span
+                    >
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                  >
+                    <button class="text-green-600 hover:text-green-900">
+                      View
+                    </button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div
+                        class="flex-shrink-0 h-10 w-10 rounded-full bg-red-100 flex items-center justify-center"
+                      >
+                        <span class="text-red-600 font-medium">KK</span>
+                      </div>
+                      <div class="ml-4">
+                        <div class="text-sm font-medium text-gray-900">
+                          Kevin Kiprotich
+                        </div>
+                        <div class="text-sm text-gray-500">
+                          kevin.k@example.com
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    Tree Planting Kit
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    -1,000 pts
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    May 15, 2025
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span
+                      class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800"
+                      >Cancelled</span
+                    >
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                  >
+                    <button class="text-green-600 hover:text-green-900">
+                      View
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
+            <div class="flex items-center justify-between">
+              <div class="text-sm text-gray-600">
+                Showing <span class="font-medium">1</span> to
+                <span class="font-medium">4</span> of
+                <span class="font-medium">216</span> redemptions
+              </div>
+              <div class="flex space-x-2">
+                <button
+                  class="px-3 py-1 border rounded text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Previous
+                </button>
+                <button
+                  class="px-3 py-1 border rounded bg-green-600 text-white text-sm hover:bg-green-700"
+                >
+                  1
+                </button>
+                <button
+                  class="px-3 py-1 border rounded text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  2
+                </button>
+                <button
+                  class="px-3 py-1 border rounded text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  3
+                </button>
+                <button
+                  class="px-3 py-1 border rounded text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

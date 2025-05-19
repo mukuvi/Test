@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" x-data="{ sidebarOpen: false }" class="bg-gray-100">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rewards - EcoSense AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      defer
+    ></script>
+    <style>
+      [x-cloak] {
+        display: none !important;
+      }
+      .progress-bar {
+        height: 8px;
+        border-radius: 4px;
+      }
+      .progress-fill {
+        height: 100%;
+        border-radius: 4px;
+        transition: width 0.5s ease-in-out;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex">
+    <!-- Overlay for mobile when sidebar is open -->
+    <div
+      x-show="sidebarOpen"
+      x-cloak
+      @click="sidebarOpen = false"
+      class="fixed inset-0 z-20 bg-black bg-opacity-50 lg:hidden"
+    ></div>
+
+    <!-- Sidebar -->
+    <aside
+      :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+      class="fixed z-30 inset-y-0 left-0 w-64 bg-green-700 text-white transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0"
+    >
+      <div
+        class="p-4 lg:p-6 font-bold text-xl lg:text-2xl border-b border-green-600 flex justify-between items-center"
+      >
+        EcoSense AI
+        <!-- Close Icon for Mobile Sidebar -->
+        <button
+          @click="sidebarOpen = false"
+          class="lg:hidden text-2xl text-white focus:outline-none"
+        >
+          ✖
+        </button>
+      </div>
+      <nav class="p-2 lg:p-4 space-y-1 lg:space-y-2">
+        <a
+          href="testUser.html"
+          class="block py-2 px-3 lg:px-4 rounded hover:bg-green-600 transform transition-all duration-300 text-sm lg:text-base"
+          >Dashboard</a
+        >
+        <a
+          href="#"
+          class="block py-2 px-3 lg:px-4 rounded hover:bg-green-600 transform transition-all duration-300 text-sm lg:text-base"
+          >My Reports</a
+        >
+        <a
+          href="rewards.html"
+          class="block py-2 px-3 lg:px-4 rounded bg-green-600 hover:bg-green-500 transform transition-all duration-300 text-sm lg:text-base"
+          >Rewards</a
+        >
+        <a
+          href="#"
+          class="block py-2 px-3 lg:px-4 rounded hover:bg-green-600 transform transition-all duration-300 text-sm lg:text-base"
+          >Settings</a
+        >
+        <a
+          href="pages.html"
+          class="block py-2 px-3 lg:px-4 rounded hover:bg-green-600 transform transition-all duration-300 text-sm lg:text-base"
+          >Logout</a
+        >
+      </nav>
+    </aside>
+
+    <div class="flex-1 flex flex-col overflow-x-hidden">
+      <header
+        class="bg-white shadow-md flex items-center justify-between px-4 py-3 lg:hidden"
+      >
+        <button
+          @click="sidebarOpen = !sidebarOpen"
+          class="text-green-700 text-2xl focus:outline-none transition-transform duration-300 ease-in-out"
+        >
+          ☰
+        </button>
+        <span class="text-lg font-bold text-green-700">Rewards</span>
+        <div class="w-6"></div>
+      </header>
+
+      <main class="p-4 lg:p-6">
+        <h1 class="text-2xl lg:text-3xl font-bold text-green-700 mb-4 lg:mb-6">
+          Your Rewards
+        </h1>
+
+        <!-- Points Summary -->
+        <section class="bg-white p-4 lg:p-6 rounded-lg shadow-lg mb-6 lg:mb-8">
+          <div
+            class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4"
+          >
+            <div>
+              <h2 class="text-lg lg:text-xl font-semibold text-gray-800">
+                Current Points Balance
+              </h2>
+              <p class="text-3xl lg:text-4xl font-bold text-green-600 mt-1">
+                1,250 pts
+              </p>
+            </div>
+            <div class="w-full md:w-auto">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-sm font-medium text-gray-600"
+                  >Next Tier: Eco Champion (1,500 pts)</span
+                >
+                <span class="text-sm font-medium text-green-600"
+                  >250 pts needed</span
+                >
+              </div>
+              <div class="progress-bar bg-gray-200 w-full">
+                <div
+                  class="progress-fill bg-green-500"
+                  style="width: 83%"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-6 lg:mb-8">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg lg:text-xl font-bold text-gray-800">
+              Available Rewards
+            </h2>
+            <span class="text-sm text-gray-500">Sorted by points</span>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6"
+          >
+            <div
+              class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+            >
+              <div class="p-4 lg:p-5">
+                <div class="flex justify-between items-start mb-3">
+                  <h3 class="text-lg font-semibold text-gray-800">
+                    Shopping Voucher
+                  </h3>
+                  <span
+                    class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded"
+                    >500 pts</span
+                  >
+                </div>
+                <p class="text-gray-600 text-sm mb-4">
+                  Get 10% off at participating stores across Nairobi
+                </p>
+                <button
+                  class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded transition duration-300"
+                >
+                  Redeem Now
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+            >
+              <div class="p-4 lg:p-5">
+                <div class="flex justify-between items-start mb-3">
+                  <h3 class="text-lg font-semibold text-gray-800">
+                    Mobile Airtime
+                  </h3>
+                  <span
+                    class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded"
+                    >300 pts</span
+                  >
+                </div>
+                <p class="text-gray-600 text-sm mb-4">
+                  Redeem for KES 100 airtime on Safaricom, Airtel or Telkom
+                </p>
+                <button
+                  class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded transition duration-300"
+                >
+                  Redeem Now
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+            >
+              <div class="p-4 lg:p-5">
+                <div class="flex justify-between items-start mb-3">
+                  <h3 class="text-lg font-semibold text-gray-800">
+                    Eco Tote Bag
+                  </h3>
+                  <span
+                    class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded"
+                    >750 pts</span
+                  >
+                </div>
+                <p class="text-gray-600 text-sm mb-4">
+                  Premium reusable shopping bag with EcoSense logo
+                </p>
+                <button
+                  class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded transition duration-300"
+                >
+                  Redeem Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-lg lg:text-xl font-bold text-gray-800 mb-4">
+            Your Reward History
+          </h2>
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="min-w-full text-sm lg:text-base">
+                <thead class="bg-gray-100 text-gray-600">
+                  <tr>
+                    <th class="px-4 py-3 text-left">Date</th>
+                    <th class="px-4 py-3 text-left">Reward</th>
+                    <th class="px-4 py-3 text-left">Points</th>
+                    <th class="px-4 py-3 text-left">Status</th>
+                  </tr>
+                </thead>
+                <tbody class="text-gray-700 divide-y divide-gray-200">
+                  <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-3 whitespace-nowrap">May 15, 2025</td>
+                    <td class="px-4 py-3">Mobile Airtime</td>
+                    <td class="px-4 py-3">-300 pts</td>
+                    <td class="px-4 py-3">
+                      <span
+                        class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded"
+                        >Redeemed</span
+                      >
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-3 whitespace-nowrap">Apr 28, 2025</td>
+                    <td class="px-4 py-3">Shopping Voucher</td>
+                    <td class="px-4 py-3">-500 pts</td>
+                    <td class="px-4 py-3">
+                      <span
+                        class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded"
+                        >Redeemed</span
+                      >
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-3 whitespace-nowrap">Apr 10, 2025</td>
+                    <td class="px-4 py-3">Report Bonus</td>
+                    <td class="px-4 py-3 text-green-600">+50 pts</td>
+                    <td class="px-4 py-3">
+                      <span
+                        class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded"
+                        >Earned</span
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div
+              class="px-4 py-3 bg-gray-50 border-t border-gray-200 text-right"
+            >
+              <button
+                class="text-sm text-green-600 hover:text-green-800 font-medium"
+              >
+                View Full History →
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      // Simple Alpine.js component for reward redemption confirmation
+      document.addEventListener("alpine:init", () => {
+        Alpine.data("rewards", () => ({
+          redeemReward(rewardName, points) {
+            if (
+              confirm(
+                `Are you sure you want to redeem ${rewardName} for ${points} points?`
+              )
+            ) {
+              alert(
+                `Success! You've redeemed ${rewardName}. Your points will be deducted shortly.`
+              );
+              // Here you would typically make an API call to process the redemption
+            }
+          },
+        }));
+      });
+    </script>
+  </body>
+</html>

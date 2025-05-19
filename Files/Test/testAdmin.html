@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoSense Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      defer
+    ></script>
+    <style>
+      [x-cloak] {
+        display: none !important;
+      }
+      @media (max-width: 767px) {
+        .text-responsive {
+          font-size: 0.85rem;
+        }
+        .table-responsive th,
+        .table-responsive td {
+          padding: 0.5rem 0.25rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100" x-data="{ openMenu: false }">
+    <div
+      x-show="openMenu"
+      x-cloak
+      @click="openMenu = false"
+      class="fixed inset-0 z-50 bg-gray-800 bg-opacity-75 lg:hidden"
+    ></div>
+
+    <aside
+      :class="openMenu ? 'translate-x-0' : '-translate-x-full'"
+      class="fixed top-0 left-0 z-40 w-64 h-full bg-green-700 text-white transition-transform transform lg:translate-x-0"
+    >
+      <div class="flex items-center justify-between p-4">
+        <span class="text-xl lg:text-2xl font-bold">EcoSense Admin</span>
+        <button @click="openMenu = false" class="text-white lg:hidden">
+          ✕
+        </button>
+      </div>
+      <nav class="mt-4 lg:mt-6">
+        <a
+          href="testAdmin.html"
+          @click="openMenu = false"
+          class="block py-2 px-4 hover:bg-green-600 text-sm lg:text-base"
+          >Dashboard</a
+        >
+        <a
+          href="adminreport.html"
+          @click="openMenu = false"
+          class="block py-2 px-4 hover:bg-green-600 text-sm lg:text-base"
+          >Reports</a
+        >
+        <a
+          href="adminanalytics.html"
+          @click="openMenu = false"
+          class="block py-2 px-4 hover:bg-green-600 text-sm lg:text-base"
+          >Users</a
+        >
+        <a
+          href="adminanalytics.html"
+          @click="openMenu = false"
+          class="block py-2 px-4 hover:bg-green-600 text-sm lg:text-base"
+          >Analytics</a
+        >
+        <a
+          href="#"
+          @click="openMenu = false"
+          class="block py-2 px-4 hover:bg-green-600 text-sm lg:text-base"
+          >Settings</a
+        >
+        <a
+          href="pages.html"
+          @click="openMenu = false"
+          class="block py-2 px-4 hover:bg-green-600 text-sm lg:text-base"
+          >Logout</a
+        >
+      </nav>
+    </aside>
+
+    <div class="flex-1 flex flex-col ml-0 lg:ml-64">
+      <header
+        class="flex justify-between items-center p-3 bg-white shadow-md lg:hidden"
+      >
+        <button @click="openMenu = !openMenu" class="text-green-700">
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+        </button>
+        <span class="text-xl font-bold text-green-700">EcoSense Admin</span>
+        <div class="w-6"></div>
+      </header>
+
+      <main class="p-3 lg:p-6">
+        <h1 class="text-2xl lg:text-3xl font-bold text-green-700 mb-4 lg:mb-6">
+          Dashboard Overview
+        </h1>
+
+        <section
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-6 lg:mb-10"
+        >
+          <div
+            class="bg-white p-4 lg:p-5 rounded-lg shadow hover:shadow-md transition-shadow"
+          >
+            <h3 class="text-base lg:text-lg font-semibold text-gray-600">
+              Total Reports
+            </h3>
+            <p
+              class="text-2xl lg:text-3xl font-bold text-green-700 mt-1 lg:mt-2"
+            >
+              128
+            </p>
+          </div>
+          <div
+            class="bg-white p-4 lg:p-5 rounded-lg shadow hover:shadow-md transition-shadow"
+          >
+            <h3 class="text-base lg:text-lg font-semibold text-gray-600">
+              Active Users
+            </h3>
+            <p
+              class="text-2xl lg:text-3xl font-bold text-green-700 mt-1 lg:mt-2"
+            >
+              54
+            </p>
+          </div>
+          <div
+            class="bg-white p-4 lg:p-5 rounded-lg shadow hover:shadow-md transition-shadow"
+          >
+            <h3 class="text-base lg:text-lg font-semibold text-gray-600">
+              Resolved Cases
+            </h3>
+            <p
+              class="text-2xl lg:text-3xl font-bold text-green-700 mt-1 lg:mt-2"
+            >
+              89
+            </p>
+          </div>
+          <div
+            class="bg-white p-4 lg:p-5 rounded-lg shadow hover:shadow-md transition-shadow"
+          >
+            <h3 class="text-base lg:text-lg font-semibold text-gray-600">
+              Pending Rewards
+            </h3>
+            <p
+              class="text-2xl lg:text-3xl font-bold text-green-700 mt-1 lg:mt-2"
+            >
+              12
+            </p>
+          </div>
+        </section>
+
+        <section class="bg-white p-4 lg:p-6 rounded-lg shadow overflow-hidden">
+          <div
+            class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 lg:mb-4 gap-3"
+          >
+            <h2 class="text-lg lg:text-xl font-bold">Recent Waste Reports</h2>
+            <div class="flex gap-2">
+              <button
+                class="bg-green-600 text-white px-3 py-1.5 lg:px-4 lg:py-2 rounded hover:bg-green-700 text-sm lg:text-base"
+              >
+                Export
+              </button>
+              <button
+                class="bg-green-600 text-white px-3 py-1.5 lg:px-4 lg:py-2 rounded hover:bg-green-700 text-sm lg:text-base"
+              >
+                Filter
+              </button>
+            </div>
+          </div>
+          <div class="overflow-x-auto">
+            <table
+              class="min-w-full text-xs lg:text-sm text-left table-responsive"
+            >
+              <thead class="bg-gray-100 text-gray-600 uppercase">
+                <tr class="text-responsive">
+                  <th class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    ID
+                  </th>
+                  <th class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    User
+                  </th>
+                  <th class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    Location
+                  </th>
+                  <th class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    Status
+                  </th>
+                  <th class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    Date
+                  </th>
+                  <th class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-700">
+                <tr class="border-t hover:bg-gray-50 text-responsive">
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    #RPT123
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    Jane Wambui
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    Nairobi
+                  </td>
+                  <td
+                    class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap text-green-600"
+                  >
+                    Resolved
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    May 10, 2025
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    <button
+                      class="bg-green-600 text-white px-2 py-1 lg:px-3 lg:py-1.5 rounded hover:bg-green-700 text-xs lg:text-sm"
+                    >
+                      View
+                    </button>
+                  </td>
+                </tr>
+                <tr class="border-t hover:bg-gray-50 text-responsive">
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    #RPT124
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    Brian Otieno
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    Kisumu
+                  </td>
+                  <td
+                    class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap text-yellow-600"
+                  >
+                    Pending
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    May 9, 2025
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    <button
+                      class="bg-green-600 text-white px-2 py-1 lg:px-3 lg:py-1.5 rounded hover:bg-green-700 text-xs lg:text-sm"
+                    >
+                      View
+                    </button>
+                  </td>
+                </tr>
+                <tr class="border-t hover:bg-gray-50 text-responsive">
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    #RPT125
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    Faith Njeri
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    Thika
+                  </td>
+                  <td
+                    class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap text-red-600"
+                  >
+                    Rejected
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    May 8, 2025
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    <button
+                      class="bg-green-600 text-white px-2 py-1 lg:px-3 lg:py-1.5 rounded hover:bg-green-700 text-xs lg:text-sm"
+                    >
+                      View
+                    </button>
+                  </td>
+                </tr>
+                <tr class="border-t hover:bg-gray-50 text-responsive">
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    #RPT126
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    Kevin Kiprotich
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    Eldoret
+                  </td>
+                  <td
+                    class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap text-green-600"
+                  >
+                    Resolved
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    May 7, 2025
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    <button
+                      class="bg-green-600 text-white px-2 py-1 lg:px-3 lg:py-1.5 rounded hover:bg-green-700 text-xs lg:text-sm"
+                    >
+                      View
+                    </button>
+                  </td>
+                </tr>
+                <tr class="border-t hover:bg-gray-50 text-responsive">
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    #RPT127
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    Linet Achieng
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    Homa Bay
+                  </td>
+                  <td
+                    class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap text-yellow-600"
+                  >
+                    Pending
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    May 7, 2025
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    <button
+                      class="bg-green-600 text-white px-2 py-1 lg:px-3 lg:py-1.5 rounded hover:bg-green-700 text-xs lg:text-sm"
+                    >
+                      View
+                    </button>
+                  </td>
+                </tr>
+                <tr class="border-t hover:bg-gray-50 text-responsive">
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    #RPT128
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    Daniel Mwangi
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    Nakuru
+                  </td>
+                  <td
+                    class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap text-green-600"
+                  >
+                    Resolved
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    May 6, 2025
+                  </td>
+                  <td class="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+                    <button
+                      class="bg-green-600 text-white px-2 py-1 lg:px-3 lg:py-1.5 rounded hover:bg-green-700 text-xs lg:text-sm"
+                    >
+                      View
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="flex justify-between items-center mt-4">
+            <div class="text-sm text-gray-600">
+              Showing 1 to 6 of 128 entries
+            </div>
+            <div class="flex gap-1">
+              <button class="px-3 py-1 border rounded text-sm">Previous</button>
+              <button
+                class="px-3 py-1 border rounded bg-green-600 text-white text-sm"
+              >
+                1
+              </button>
+              <button class="px-3 py-1 border rounded text-sm">2</button>
+              <button class="px-3 py-1 border rounded text-sm">3</button>
+              <button class="px-3 py-1 border rounded text-sm">Next</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
